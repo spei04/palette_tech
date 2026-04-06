@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Palette | Autonomous Financial Execution</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800;900&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          /* Dark mode tokens */
+          "surface-container-lowest": "#000000",
+          "error": "#ff6e84",
+          "on-tertiary": "#584b74",
+          "error-container": "#a70138",
+          "primary-container": "#8e9ce7",
+          "on-secondary-fixed": "#393f52",
+          "primary-fixed-dim": "#8e9ce7",
+          "surface-bright": "#2a2b36",
+          "inverse-primary": "#4c5aa0",
+          "on-secondary": "#4c5166",
+          "secondary-fixed": "#dde1fb",
+          "on-tertiary-fixed": "#3c2f56",
+          "tertiary-container": "#deccfd",
+          "on-primary": "#18286c",
+          "primary-fixed": "#9ba9f5",
+          "on-primary-fixed": "#000c46",
+          "outline": "#75757e",
+          "surface-dim": "#0d0e15",
+          "secondary-fixed-dim": "#cfd3ec",
+          "surface": "#0d0e15",
+          "on-background": "#f4f2fd",
+          "surface-tint": "#9ba9f5",
+          "secondary": "#dde1fb",
+          "surface-container-low": "#12131b",
+          "on-secondary-container": "#cbcfe8",
+          "primary": "#9ba9f5",
+          "inverse-surface": "#fbf8ff",
+          "on-surface": "#f4f2fd",
+          "on-error": "#490013",
+          "tertiary": "#eaddff",
+          "surface-container": "#181922",
+          "outline-variant": "#474750",
+          "secondary-container": "#41465a",
+          "on-primary-container": "#081a60",
+          "surface-container-highest": "#24252f",
+          "on-surface-variant": "#abaab4",
+          "surface-variant": "#24252f",
+          "background": "#0d0e15",
+          "on-error-container": "#ffb2b9",
+          "surface-container-high": "#1e1f28",
+          "on-primary-fixed-variant": "#223175",
+          "inverse-on-surface": "#54545d",
+          "on-tertiary-container": "#50426a",
+          "accent-mint": "#e2f9f1",
+          "on-accent-mint": "#00513b",
+          "accent-rose": "#fcecee",
+          "on-accent-rose": "#690020"
+        },
+        fontFamily: {
+          "headline": ["Epilogue"],
+          "body": ["Manrope"],
+          "label": ["Manrope"]
+        },
+        borderRadius: {
+          DEFAULT: "0.125rem",
+          lg: "0.25rem",
+          xl: "0.5rem",
+          full: "0.75rem"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  /* ── Dark mode base ─────────────────────────────────────── */
+  html.dark body {
+    background-color: #0d0e15;
+    color: #f4f2fd;
+  }
+  html.dark .constellation-bg {
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(155,169,245,0.05) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(142,156,231,0.05) 0%, transparent 40%);
+  }
+  html.dark .glass-panel {
+    background: rgba(42,43,54,0.6);
+    backdrop-filter: blur(20px);
+  }
+  html.dark .text-gradient {
+    background: linear-gradient(135deg, #9ba9f5 0%, #8e9ce7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ── Light mode overrides ───────────────────────────────── */
+  html.light body {
+    background-color: #fbf8ff;
+    color: #31323b;
+  }
+  html.light .constellation-bg { display: none; }
+  html.light #constellation-canvas { display: block; }
+
+  /* nav */
+  html.light .lm-nav {
+    background: rgba(248,248,255,0.85) !important;
+    border-bottom: 1px solid #e3e1ee;
+  }
+  html.light .lm-nav .lm-logo   { color: #1a1b26; }
+  html.light .lm-nav .lm-link   { color: #5b5e72; }
+  html.light .lm-nav .lm-link:hover { color: #545c8b; }
+  html.light .lm-nav .lm-signin { color: #5b5e72; }
+  html.light .lm-nav .lm-btn    {
+    background: #545c8b; color: #fff;
+  }
+
+  /* hero */
+  html.light .lm-hero-label { color: #545c8b; }
+  html.light .lm-hero-h1    { color: #31323b; }
+  html.light .lm-hero-sub   { color: #5e5e69; }
+  html.light .text-gradient {
+    background: linear-gradient(135deg, #545c8b, #b3bbf1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  html.light .lm-badge {
+    background: #efedf7;
+    border-color: #b1b1bd33;
+    color: #5e5e69;
+  }
+  html.light .lm-badge-dot { background: #545c8b; }
+  html.light .lm-btn-primary  { background: linear-gradient(135deg,#545c8b,#b3bbf1); color:#fff; }
+  html.light .lm-btn-ghost    {
+    border-color: #b1b1bd33; color: #31323b;
+  }
+  html.light .lm-btn-ghost:hover { background: #efedf7; }
+
+  /* sections */
+  html.light .lm-section-label   { color: #545c8b; }
+  html.light .lm-section-h2      { color: #31323b; }
+  html.light .lm-section-body    { color: #5e5e69; }
+  html.light .lm-card {
+    background: rgba(255,255,255,0.8) !important;
+    border: 1px solid rgba(255,255,255,0.5) !important;
+  }
+  html.light .lm-card-sm {
+    background: rgba(255,255,255,0.8) !important;
+    border-color: #b1b1bd22 !important;
+  }
+  html.light .lm-icon-wrap   { background: #efedf7 !important; }
+  html.light .lm-icon-color  { color: #545c8b !important; }
+  html.light .lm-icon-tert   { color: #70557b !important; }
+  html.light .lm-terminal    { background: #f5f2fb !important; }
+  html.light .lm-terminal-bar { border-color: #e3e1ee !important; }
+  html.light .lm-term-text   { color: #5e5e69 !important; }
+  html.light .lm-term-primary { color: #545c8b !important; }
+  html.light .lm-term-tert    { color: #70557b !important; }
+  html.light .lm-h3           { color: #31323b; }
+  html.light .lm-tag-primary  { background: #545c8b !important; color: #fff !important; }
+  html.light .lm-tag-tert     { background: #70557b !important; color: #fff !important; }
+  html.light .lm-stat-color   { color: #545c8b !important; }
+  html.light .lm-cta-section  { background: #efedf7 !important; }
+  html.light .lm-cta-h2       { color: #31323b; }
+  html.light .lm-cta-body     { color: #5e5e69; }
+  html.light .lm-cta-btn      { background: #1a1b26; color: #fff; }
+  html.light .lm-cta-btn:hover { background: #545c8b; }
+  html.light .lm-footer       { background: #f5f2fb !important; border-top-color: #e3e1ee !important; }
+  html.light .lm-footer-logo  { color: #1a1b26; }
+  html.light .lm-footer-text  { color: #5e5e69; }
+  html.light .lm-footer-link  { color: #5e5e69; }
+  html.light .lm-footer-link:hover { color: #545c8b; }
+
+  /* misc shared */
+  body { overflow-x: hidden; }
+  .constellation-bg {
+    position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1;
+  }
+  .glass-panel {
+    background: rgba(42,43,54,0.6);
+    backdrop-filter: blur(20px);
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+  }
+  #constellation-canvas {
+    position:fixed; top:0; left:0; width:100%; height:100%;
+    pointer-events:none; z-index:0; opacity:0.35;
+    display:none;
+  }
+  html.light #constellation-canvas { display:block; }
+  section, header, footer, nav { position:relative; z-index:10; }
+
+  @keyframes flow {
+    0%   { transform: translate(0,0) scale(1); }
+    50%  { transform: translate(-5%,5%) scale(1.05); }
+    100% { transform: translate(0,0) scale(1); }
+  }
+  .animate-flow { animation: flow 20s ease-in-out infinite; }
+  .hover-lift { transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+  .hover-lift:hover { transform: translateY(-4px); }
+
+  /* Theme toggle button */
+  #theme-toggle {
+    cursor: pointer;
+    width: 2.25rem; height: 2.25rem;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+    border: 1px solid transparent;
+  }
+  html.dark  #theme-toggle { background: #1e1f28; border-color: #47475033; color:#abaab4; }
+  html.dark  #theme-toggle:hover { background: #24252f; }
+  html.light #theme-toggle { background: #efedf7; border-color: #b1b1bd44; color:#545c8b; }
+  html.light #theme-toggle:hover { background: #e3e1ee; }
+  #icon-moon { display:block; }
+  #icon-sun  { display:none; }
+  html.light #icon-moon { display:none; }
+  html.light #icon-sun  { display:block; }
+</style>
+</head>
+
+<body class="font-body selection:bg-primary/30 selection:text-primary">
+
+<!-- Background layers -->
+<div class="constellation-bg"></div>
+<canvas id="constellation-canvas"></canvas>
+
+<!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
+<nav class="fixed top-0 w-full z-50 lm-nav bg-[#0d0e15]/80 backdrop-blur-xl transition-colors duration-500 shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
+  <div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+    <div class="lm-logo text-2xl font-bold tracking-tighter text-[#f4f2fd] font-headline">Palette</div>
+
+    <div class="hidden md:flex items-center space-x-10 font-headline tracking-tight text-sm font-medium">
+      <a class="lm-link text-[#f4f2fd]/60 hover:text-[#f4f2fd] transition-colors" href="#">Platform</a>
+      <a class="lm-link text-[#f4f2fd]/60 hover:text-[#f4f2fd] transition-colors" href="#">Solutions</a>
+      <a class="lm-link text-[#f4f2fd]/60 hover:text-[#f4f2fd] transition-colors" href="#">Pricing</a>
+      <a class="lm-link text-[#f4f2fd]/60 hover:text-[#f4f2fd] transition-colors" href="#">Docs</a>
+    </div>
+
+    <div class="flex items-center space-x-4 font-headline text-sm font-medium">
+      <button id="theme-toggle" title="Toggle theme" aria-label="Toggle dark/light mode">
+        <span id="icon-moon" class="material-symbols-outlined text-[18px]">dark_mode</span>
+        <span id="icon-sun"  class="material-symbols-outlined text-[18px]">light_mode</span>
+      </button>
+      <button class="lm-signin text-[#f4f2fd]/60 hover:text-[#f4f2fd] transition-colors">Sign In</button>
+      <button class="lm-btn bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-md hover:scale-[1.02] transition-transform active:scale-95 duration-200">
+        Request Access
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════ MAIN ══════════════════════════════ -->
+<main class="relative pt-20">
+
+  <!-- ── Hero ─────────────────────────────────────────────────────── -->
+  <section class="min-h-[921px] flex flex-col justify-center px-8 max-w-7xl mx-auto relative">
+    <!-- light-mode gradient blobs -->
+    <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden hidden lm-hero-blobs">
+      <div class="absolute -top-1/4 -right-1/4 w-[120%] h-[120%] bg-gradient-to-br from-[#545c8b]/5 via-[#70557b]/5 to-transparent rounded-full blur-[120px] animate-flow"></div>
+      <div class="absolute top-1/2 -left-1/4 w-[80%] h-[80%] bg-gradient-to-tr from-[#5b5e72]/5 to-transparent rounded-full blur-[100px] opacity-40 animate-flow" style="animation-delay:-5s;"></div>
+    </div>
+
+    <div class="max-w-4xl space-y-8 relative z-10">
+      <div class="lm-badge inline-flex items-center space-x-2 px-3 py-1 bg-surface-container-high rounded-full border border-outline-variant/15">
+        <span class="lm-badge-dot w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+        <span class="text-xs uppercase tracking-widest text-on-surface-variant font-medium">Now in Private Beta</span>
+      </div>
+
+      <h1 class="lm-hero-h1 font-headline text-6xl md:text-8xl font-extrabold tracking-tighter leading-[0.9] text-on-background">
+        Autonomous<br/>
+        <span class="text-gradient">Financial</span><br/>
+        Execution
+      </h1>
+
+      <p class="lm-hero-sub text-xl md:text-2xl text-on-surface-variant max-w-2xl font-light leading-relaxed">
+        AI agents that autonomously verify, approve, and execute your business payments — transforming accounts payable from a manual bottleneck into an intelligent execution layer.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 pt-4">
+        <button class="lm-btn-primary bg-gradient-to-br from-primary to-primary-container text-on-primary px-8 py-4 rounded-md font-semibold text-lg hover:shadow-[0_0_30px_rgba(155,169,245,0.3)] transition-all">
+          Request Early Access
+        </button>
+        <button class="lm-btn-ghost flex items-center justify-center gap-2 border border-outline-variant/15 hover:bg-surface-container-high px-8 py-4 rounded-md font-semibold text-lg transition-colors group">
+          See How It Works
+          <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Decorative ring -->
+    <div class="absolute right-0 top-1/2 -translate-y-1/2 w-1/3 aspect-square hidden lg:block opacity-40">
+      <div class="w-full h-full relative border border-outline-variant/10 rounded-full animate-[spin_20s_linear_infinite]">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-4 h-4 bg-primary rounded-full blur-sm"></div>
+        <div class="absolute bottom-1/4 right-0 w-2 h-2 bg-tertiary rounded-full blur-[2px]"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── The Execution Engine (Bento) ──────────────────────────────── -->
+  <section class="py-32 px-8 max-w-7xl mx-auto space-y-16 bg-surface-container-low/30">
+    <div class="space-y-4">
+      <p class="lm-section-label font-label text-xs uppercase tracking-[0.3em] text-primary">The Execution Engine</p>
+      <h2 class="lm-section-h2 font-headline text-4xl md:text-5xl font-bold tracking-tight">End-to-End Autonomous AP</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+      <!-- Large Feature: Invoice Ingestion -->
+      <div class="lm-card md:col-span-8 bg-surface-container rounded-2xl p-12 flex flex-col justify-between relative overflow-hidden group">
+        <div class="relative z-10 space-y-6">
+          <div class="lm-icon-wrap w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center">
+            <span class="lm-icon-color material-symbols-outlined text-primary">document_scanner</span>
+          </div>
+          <h3 class="lm-h3 font-headline text-3xl font-semibold">Intelligent Invoice Ingestion</h3>
+          <p class="lm-section-body text-on-surface-variant max-w-md">
+            Automatically ingests invoices from email or file uploads, parses contracts and vendor agreements, and matches line items against negotiated pricing and payment terms — all without human intervention.
+          </p>
+        </div>
+        <div class="mt-12 h-64 bg-surface-container-lowest rounded-xl border border-outline-variant/10 overflow-hidden">
+          <div class="p-4 space-y-3">
+            <div class="h-2 w-3/4 bg-primary/20 rounded"></div>
+            <div class="h-2 w-1/2 bg-outline-variant/20 rounded"></div>
+            <div class="flex gap-2 mt-2">
+              <div class="h-8 flex-1 rounded bg-surface-container-high border border-outline-variant/10 flex items-center px-3">
+                <span class="text-[10px] text-on-surface-variant/60 font-mono">INV-2943 · Acme Energy Corp · $84,200</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <div class="h-8 flex-1 rounded bg-surface-container-high border border-outline-variant/10 flex items-center px-3">
+                <span class="text-[10px] text-on-surface-variant/60 font-mono">MSA-0234 matched · Qty ✓ · Rate ✓ · Terms ✓</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <div class="h-8 flex-1 rounded bg-primary/10 border border-primary/20 flex items-center px-3">
+                <span class="text-[10px] text-primary font-mono font-semibold">→ APPROVED · Payment scheduled · $84,200</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Small Feature: Fraud Detection -->
+      <div class="lm-card-sm md:col-span-4 bg-surface-container rounded-2xl p-8 flex flex-col justify-between border-t border-l border-outline-variant/10">
+        <div class="space-y-4">
+          <span class="lm-icon-tert material-symbols-outlined text-tertiary">gpp_maybe</span>
+          <h3 class="lm-h3 font-headline text-xl font-semibold">Fraud Detection</h3>
+          <p class="lm-section-body text-sm text-on-surface-variant">
+            Multi-layer verification catches duplicate invoices, pricing discrepancies, and suspicious patterns before a single dollar leaves your account.
+          </p>
+        </div>
+        <div class="pt-8 flex justify-end">
+          <div class="lm-icon-wrap w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center border border-outline-variant/20">
+            <span class="material-symbols-outlined text-on-surface">shield_lock</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Small Feature: Compliance -->
+      <div class="lm-card-sm md:col-span-4 bg-surface-container rounded-2xl p-8 flex flex-col justify-between border-b border-r border-outline-variant/10">
+        <div class="space-y-4">
+          <span class="lm-icon-color material-symbols-outlined text-primary">verified_user</span>
+          <h3 class="lm-h3 font-headline text-xl font-semibold">Audit-Ready Compliance</h3>
+          <p class="lm-section-body text-sm text-on-surface-variant">
+            Every decision is logged with full reasoning and confidence scores. SOC 2 compliant. Your data never leaves your VPC.
+          </p>
+        </div>
+        <div class="pt-8">
+          <div class="h-1 w-full bg-surface-container-high rounded-full overflow-hidden">
+            <div class="h-full w-5/6 bg-primary"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medium Feature: Payment Execution -->
+      <div class="lm-card md:col-span-8 bg-surface-container rounded-2xl p-12 flex items-center gap-12 group">
+        <div class="flex-1 space-y-6">
+          <h3 class="lm-h3 font-headline text-3xl font-semibold">Automated Payment Execution</h3>
+          <p class="lm-section-body text-on-surface-variant">
+            Initiates payments through integrated banking APIs, reconciles transactions in real time, and maintains a complete ledger — with zero manual touchpoints for approved invoices.
+          </p>
+          <button class="lm-icon-color text-primary font-semibold flex items-center gap-2 group">
+            Explore the Platform
+            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+          </button>
+        </div>
+        <div class="hidden lg:block w-1/3 aspect-square bg-surface-container-high rounded-full border border-primary/20 flex items-center justify-center p-4">
+          <div class="w-full h-full rounded-full border-2 border-dashed border-outline-variant/30 flex items-center justify-center animate-[spin_30s_linear_infinite]">
+            <div class="w-4 h-4 bg-primary rounded-full"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Trust is the Primary Variable ─────────────────────────────── -->
+  <section class="py-32 px-8 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+    <div class="space-y-12">
+      <div class="space-y-4">
+        <p class="lm-section-label font-label text-xs uppercase tracking-[0.3em] text-tertiary">Refined Logic</p>
+        <h2 class="lm-section-h2 font-headline text-5xl md:text-6xl font-bold tracking-tight">Trust is the<br/>Primary Variable</h2>
+      </div>
+      <div class="space-y-8">
+
+        <div class="flex gap-6">
+          <div class="lm-icon-wrap shrink-0 w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+            <span class="lm-icon-color material-symbols-outlined">fact_check</span>
+          </div>
+          <div class="space-y-2">
+            <h4 class="lm-h3 text-xl font-bold font-headline">Transparent Decision Reasoning</h4>
+            <p class="lm-section-body text-on-surface-variant leading-relaxed">
+              Every approval, rejection, or escalation includes a detailed reasoning trace and confidence score — so your finance team always knows why a decision was made.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-6">
+          <div class="lm-icon-wrap shrink-0 w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+            <span class="lm-icon-color material-symbols-outlined">hub</span>
+          </div>
+          <div class="space-y-2">
+            <h4 class="lm-h3 text-xl font-bold font-headline">Configurable Approval Thresholds</h4>
+            <p class="lm-section-body text-on-surface-variant leading-relaxed">
+              Set autonomous execution limits by vendor, invoice amount, or contract type. The system auto-approves routine invoices and surfaces edge cases for human review.
+            </p>
+          </div>
+        </div>
+
+        <div class="flex gap-6">
+          <div class="lm-icon-wrap shrink-0 w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+            <span class="lm-icon-color material-symbols-outlined">history_edu</span>
+          </div>
+          <div class="space-y-2">
+            <h4 class="lm-h3 text-xl font-bold font-headline">Complete Auditability</h4>
+            <p class="lm-section-body text-on-surface-variant leading-relaxed">
+              Full traceability of every reasoning step, contract match, and payment action — ensuring absolute accountability and seamless audit preparation.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Terminal mockup -->
+    <div class="lm-terminal relative glass-panel rounded-3xl p-1 border border-outline-variant/10 aspect-square lg:aspect-video flex items-center justify-center">
+      <div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-tertiary/5 rounded-3xl"></div>
+      <div class="relative w-4/5 h-4/5 bg-surface-container-lowest rounded-2xl shadow-2xl overflow-hidden flex flex-col border border-outline-variant/10">
+        <div class="lm-terminal-bar h-10 border-b border-outline-variant/10 flex items-center px-4 gap-2">
+          <div class="w-3 h-3 rounded-full bg-error/20"></div>
+          <div class="w-3 h-3 rounded-full bg-primary/20"></div>
+          <div class="w-3 h-3 rounded-full bg-on-surface-variant/20"></div>
+        </div>
+        <div class="flex-1 p-8 font-mono text-sm text-on-surface-variant space-y-4">
+          <p class="lm-term-primary text-primary">ap_agent.init("acme_energy_ap");</p>
+          <p class="lm-term-text">&gt; Ingesting invoice INV-2943 · $84,200.00...</p>
+          <p class="lm-term-text">&gt; Matching against contract MSA-0234... ✓</p>
+          <p class="lm-term-text">&gt; Qty match ✓ · Rate match ✓ · No duplicates ✓</p>
+          <div class="h-16 w-full bg-surface-container rounded-lg border border-primary/10 flex items-center justify-center">
+            <span class="text-xs uppercase tracking-widest animate-pulse lm-term-text">Verifying payment terms...</span>
+          </div>
+          <p class="lm-term-tert text-tertiary">&gt; APPROVED · Payment scheduled · Confidence: 98.7%</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Case Studies ───────────────────────────────────────────────── -->
+  <section class="py-32 px-8 max-w-7xl mx-auto space-y-16">
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+      <div class="space-y-4">
+        <p class="lm-section-label font-label text-xs uppercase tracking-[0.3em] text-primary">Case Studies</p>
+        <h2 class="lm-section-h2 font-headline text-5xl font-bold">Proven Momentum</h2>
+      </div>
+      <button class="lm-section-body text-on-surface underline underline-offset-8 font-semibold hover:text-primary transition-colors">
+        View All Case Studies
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+      <!-- Case Study 1: Energy -->
+      <div class="group cursor-pointer space-y-6">
+        <div class="aspect-video rounded-2xl overflow-hidden relative">
+          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 grayscale group-hover:grayscale-0"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPu1CaSYddEc_DgoPV4JVVde5m6-vE01PSIQlgidq2UW0uA3i8zr356Mog8N2sjdrsE9C8QEsu2rqE8GDr8xVC3KpLpE2YkyJ6sUYVcXKj4aSAL9MJu8XxgGi6QcyMKPcQ19M15guWMJ27-ee0dOB9eU8aLPYUgTzv41krQGM3BUMxTHIzLf5CXVx5T9ueaSg-TNy9feaLwWyEDQjCJe8lDLHwsv-CHP8xNkKNboZfRUJ1FMtqur4iSjCTo8PLFxJR93s8JxHd-QU-"
+               alt="Energy sector facility" />
+          <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+          <div class="absolute bottom-6 left-6 flex gap-3">
+            <span class="lm-tag-primary px-3 py-1 bg-primary text-on-primary rounded text-xs font-bold tracking-widest uppercase">Energy</span>
+            <span class="px-3 py-1 bg-surface-container-highest rounded text-xs font-bold tracking-widest uppercase border border-outline-variant/20">High Volume</span>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <h3 class="lm-h3 font-headline text-2xl font-bold">Eliminating Invoice Fraud in Utilities</h3>
+          <p class="lm-section-body text-on-surface-variant leading-relaxed">
+            A regional energy utility processing 12,000+ invoices monthly deployed Palette to detect duplicate billings and contract mismatches — saving $2.3M in the first quarter.
+          </p>
+          <div class="flex items-center gap-2 lm-stat-color text-primary font-bold">
+            <span class="text-3xl">94%</span>
+            <span class="text-xs uppercase tracking-tighter">Reduction in<br/>Duplicate Invoices</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 2: Construction -->
+      <div class="group cursor-pointer space-y-6">
+        <div class="aspect-video rounded-2xl overflow-hidden relative">
+          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-60 grayscale group-hover:grayscale-0"
+               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqBgfOGGA8RHB2FE_wf60wN5vdn-Jb1m_LRSKnS08oistxvDejfBU5wMnPnsi1h2kOEyvUr7wY_fqemVx4RaFOZ5l0lta3SX4w70F_1wX18koW7gjac8FAi8LOh439BOFsY3AQydsJD8bDQgMdqa2lysBaSTAF_C3iJk9FK_u5yQasBt_eK5PLnYtFa2EGHJIaVk1TVX6Zd42kAWeAdpudLQ0uNeYNlB9Ji-AeanPYe-tNEvP4Eir80Za_yobTPuVilPxbbX-Q9vIL"
+               alt="Construction project site" />
+          <div class="absolute inset-0 bg-gradient-to-t from-surface to-transparent"></div>
+          <div class="absolute bottom-6 left-6 flex gap-3">
+            <span class="lm-tag-tert px-3 py-1 bg-tertiary text-on-tertiary rounded text-xs font-bold tracking-widest uppercase">Construction</span>
+            <span class="px-3 py-1 bg-surface-container-highest rounded text-xs font-bold tracking-widest uppercase border border-outline-variant/20">Multi-Vendor</span>
+          </div>
+        </div>
+        <div class="space-y-4">
+          <h3 class="lm-h3 font-headline text-2xl font-bold">Automating AP Across 300+ Subcontractors</h3>
+          <p class="lm-section-body text-on-surface-variant leading-relaxed">
+            A national infrastructure firm used Palette to automate payment workflows across a complex subcontractor network — cutting AP processing time from 14 days to under 24 hours.
+          </p>
+          <div class="flex items-center gap-2 lm-stat-color text-primary font-bold">
+            <span class="text-3xl">80%</span>
+            <span class="text-xs uppercase tracking-tighter">Faster Invoice<br/>Processing</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Market Opportunity ──────────────────────────────────────────── -->
+  <section class="py-32 px-8 max-w-7xl mx-auto space-y-16">
+    <div class="space-y-4 text-center max-w-2xl mx-auto">
+      <p class="lm-section-label font-label text-xs uppercase tracking-[0.3em] text-primary">Why Now</p>
+      <h2 class="lm-section-h2 font-headline text-4xl md:text-5xl font-bold tracking-tight">A $20B Market Ready for Disruption</h2>
+      <p class="lm-section-body text-on-surface-variant text-lg leading-relaxed">
+        Three converging shifts make fully autonomous AP possible today — for the first time.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <div class="lm-card bg-surface-container rounded-2xl p-10 space-y-6 hover-lift border border-outline-variant/10">
+        <div class="lm-icon-wrap w-14 h-14 rounded-2xl bg-surface-container-high flex items-center justify-center">
+          <span class="lm-icon-color material-symbols-outlined text-primary text-3xl">psychology</span>
+        </div>
+        <h3 class="lm-h3 font-headline text-xl font-semibold">Advances in AI</h3>
+        <p class="lm-section-body text-on-surface-variant text-sm leading-relaxed">
+          Modern language models can accurately interpret unstructured financial documents — contracts, invoices, vendor agreements — enabling automated reasoning over complex obligations.
+        </p>
+      </div>
+
+      <div class="lm-card bg-surface-container rounded-2xl p-10 space-y-6 hover-lift border border-outline-variant/10">
+        <div class="lm-icon-wrap w-14 h-14 rounded-2xl bg-surface-container-high flex items-center justify-center">
+          <span class="lm-icon-color material-symbols-outlined text-primary text-3xl">account_balance</span>
+        </div>
+        <h3 class="lm-h3 font-headline text-xl font-semibold">Mature Financial APIs</h3>
+        <p class="lm-section-body text-on-surface-variant text-sm leading-relaxed">
+          Banking and payment APIs are now robust and universally accessible, enabling seamless programmatic execution of financial transactions at enterprise scale.
+        </p>
+      </div>
+
+      <div class="lm-card bg-surface-container rounded-2xl p-10 space-y-6 hover-lift border border-outline-variant/10">
+        <div class="lm-icon-wrap w-14 h-14 rounded-2xl bg-surface-container-high flex items-center justify-center">
+          <span class="lm-icon-color material-symbols-outlined text-primary text-3xl">trending_up</span>
+        </div>
+        <h3 class="lm-h3 font-headline text-xl font-semibold">Organizational Readiness</h3>
+        <p class="lm-section-body text-on-surface-variant text-sm leading-relaxed">
+          Businesses are actively moving from assistive automation toward autonomous systems — with finance teams at the forefront of this shift to reduce operational burden.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────────────────── -->
+  <section class="py-32 px-8">
+    <div class="lm-cta-section max-w-5xl mx-auto rounded-3xl bg-surface-container p-16 md:p-24 text-center space-y-8 relative overflow-hidden border border-outline-variant/10">
+      <div class="absolute -top-24 -left-24 w-64 h-64 bg-primary/10 rounded-full blur-[80px]"></div>
+      <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-tertiary/10 rounded-full blur-[80px]"></div>
+      <h2 class="lm-cta-h2 font-headline text-5xl md:text-7xl font-extrabold tracking-tighter">
+        Ready to Automate<br/>Your AP?
+      </h2>
+      <p class="lm-cta-body text-on-surface-variant text-xl max-w-2xl mx-auto leading-relaxed">
+        Join the waitlist for Palette and be among the first companies to transform accounts payable into a fully autonomous execution layer.
+      </p>
+      <div class="pt-8">
+        <button class="lm-cta-btn bg-on-background text-surface px-12 py-5 rounded-md font-bold text-xl hover:bg-primary transition-colors">
+          Secure Early Access
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════════════════════════ FOOTER ════════════════════════════ -->
+<footer class="lm-footer bg-[#0d0e15] w-full py-16 px-8 border-t border-[#474750]/15">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl mx-auto">
+    <div class="space-y-6">
+      <div class="lm-footer-logo text-lg font-bold text-[#f4f2fd] font-headline">Palette</div>
+      <p class="lm-footer-text text-xs font-body uppercase tracking-widest text-[#f4f2fd]/40 leading-relaxed">
+        Transforming accounts payable from a manual process into an autonomous execution layer. Built for finance teams who demand precision at scale.
+      </p>
+    </div>
+    <div class="space-y-6">
+      <h4 class="lm-footer-logo text-[#f4f2fd] font-semibold font-headline">Platform</h4>
+      <ul class="space-y-4 text-xs font-body uppercase tracking-widest text-[#f4f2fd]/40">
+        <li class="lm-footer-link hover:text-[#f4f2fd] transition-colors duration-300 cursor-pointer">Invoice Processing</li>
+        <li class="lm-footer-link hover:text-[#f4f2fd] transition-colors duration-300 cursor-pointer">Contract Matching</li>
+        <li class="lm-footer-link hover:text-[#f4f2fd] transition-colors duration-300 cursor-pointer">Fraud Detection</li>
+        <li class="lm-footer-link hover:text-[#f4f2fd] transition-colors duration-300 cursor-pointer">Payment Execution</li>
+      </ul>
+    </div>
+    <div class="space-y-6">
+      <h4 class="lm-footer-logo text-[#f4f2fd] font-semibold font-headline">Resources</h4>
+      <ul class="space-y-4 text-xs font-body uppercase tracking-widest text-[#f4f2fd]/40">
+        <li class="lm-footer-link hover:text-[#f4f2fd] transition-colors duration-300 cursor-pointer">Documentation</li>
+        <li class="lm-footer-link hover:text-[#f4f2fd] transition-colors duration-300 cursor-pointer">Security</li>
+        <li class="lm-footer-link hover:text-[#f4f2fd] transition-colors duration-300 cursor-pointer">Status</li>
+        <li class="lm-footer-link hover:text-[#f4f2fd] transition-colors duration-300 cursor-pointer">Terms of Service</li>
+      </ul>
+    </div>
+    <div class="space-y-6">
+      <h4 class="lm-footer-logo text-[#f4f2fd] font-semibold font-headline">Connect</h4>
+      <ul class="space-y-4 text-xs font-body uppercase tracking-widest text-[#f4f2fd]/40">
+        <li class="lm-footer-link hover:text-[#f4f2fd] transition-colors duration-300 cursor-pointer">Twitter / X</li>
+        <li class="lm-footer-link hover:text-[#f4f2fd] transition-colors duration-300 cursor-pointer">LinkedIn</li>
+        <li class="lm-footer-link hover:text-[#f4f2fd] transition-colors duration-300 cursor-pointer">Contact Us</li>
+        <li class="lm-footer-link hover:text-[#f4f2fd] transition-colors duration-300 cursor-pointer">Privacy Policy</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-outline-variant/10">
+    <p class="lm-footer-text text-xs font-body uppercase tracking-widest text-[#f4f2fd]/40">
+      © 2025 Palette. All rights reserved. Autonomous Financial Execution.
+    </p>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════ SCRIPTS ═══════════════════════════ -->
+<script>
+  /* ── Theme Toggle ─────────────────────────────────────── */
+  const html = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
+
+  // Persist preference
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    html.classList.replace('dark', 'light');
+  }
+
+  toggle.addEventListener('click', () => {
+    if (html.classList.contains('dark')) {
+      html.classList.replace('dark', 'light');
+      localStorage.setItem('theme', 'light');
+    } else {
+      html.classList.replace('light', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+
+  /* ── Light mode hero blobs visibility ─────────────────── */
+  function syncBlobs() {
+    const blobs = document.querySelector('.lm-hero-blobs');
+    if (!blobs) return;
+    blobs.classList.toggle('hidden', html.classList.contains('dark'));
+  }
+  syncBlobs();
+  toggle.addEventListener('click', syncBlobs);
+
+  /* ── Constellation (light mode) ───────────────────────── */
+  const canvas = document.getElementById('constellation-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  const particleCount = 80;
+  const connectionDistance = 150;
+  const mouse = { x: null, y: null, radius: 200 };
+
+  window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+  window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; init(); });
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 2 + 1;
+      this.density = Math.random() * 30 + 1;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+    }
+    draw() {
+      ctx.fillStyle = '#545c8b';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.fill();
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > canvas.width)  this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+      const dx = mouse.x - this.x, dy = mouse.y - this.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < mouse.radius) {
+        const f = (mouse.radius - dist) / mouse.radius;
+        this.x -= (dx/dist) * f * this.density * 0.5;
+        this.y -= (dy/dist) * f * this.density * 0.5;
+      }
+    }
+  }
+
+  function init() {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+    particles = [];
+    for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p, i) => {
+      p.update(); p.draw();
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = p.x - particles[j].x, dy = p.y - particles[j].y;
+        const d  = Math.sqrt(dx*dx + dy*dy);
+        if (d < connectionDistance) {
+          ctx.strokeStyle = `rgba(84,92,139,${1 - d/connectionDistance})`;
+          ctx.lineWidth = 0.5;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    });
+    requestAnimationFrame(animate);
+  }
+
+  init();
+  animate();
+</script>
+</body>
+</html>
