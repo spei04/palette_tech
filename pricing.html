@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Palette | Pricing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800;900&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "surface-container-lowest": "#000000",
+          "error": "#ff6e84",
+          "on-tertiary": "#584b74",
+          "primary-container": "#8e9ce7",
+          "surface-bright": "#2a2b36",
+          "on-secondary": "#4c5166",
+          "tertiary-container": "#deccfd",
+          "on-primary": "#18286c",
+          "primary-fixed": "#9ba9f5",
+          "on-primary-fixed": "#000c46",
+          "outline": "#75757e",
+          "surface-dim": "#0d0e15",
+          "surface": "#0d0e15",
+          "on-background": "#f4f2fd",
+          "surface-tint": "#9ba9f5",
+          "secondary": "#dde1fb",
+          "surface-container-low": "#12131b",
+          "primary": "#9ba9f5",
+          "inverse-surface": "#fbf8ff",
+          "on-surface": "#f4f2fd",
+          "tertiary": "#eaddff",
+          "surface-container": "#181922",
+          "outline-variant": "#474750",
+          "secondary-container": "#41465a",
+          "on-primary-container": "#081a60",
+          "surface-container-highest": "#24252f",
+          "on-surface-variant": "#abaab4",
+          "surface-variant": "#24252f",
+          "background": "#0d0e15",
+          "surface-container-high": "#1e1f28",
+          "on-primary-fixed-variant": "#223175",
+          "inverse-on-surface": "#54545d",
+          "on-tertiary-container": "#50426a"
+        },
+        fontFamily: { headline: ["Epilogue"], body: ["Manrope"], label: ["Manrope"] },
+        borderRadius: { DEFAULT: "0.125rem", lg: "0.25rem", xl: "0.5rem", full: "0.75rem" }
+      }
+    }
+  }
+</script>
+<style>
+  html.dark body  { background-color: #0d0e15; color: #f4f2fd; }
+  html.light body { background-color: #fbf8ff; color: #31323b; }
+
+  html.dark .constellation-bg {
+    position: fixed; top:0; left:0; width:100%; height:100%; z-index:-1;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(155,169,245,0.05) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(142,156,231,0.05) 0%, transparent 40%);
+  }
+  html.light .constellation-bg { display:none; }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #9ba9f5 0%, #8e9ce7 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  html.light .text-gradient {
+    background: linear-gradient(135deg, #545c8b, #b3bbf1);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  html.light .lm-nav      { background: rgba(248,248,255,0.85) !important; border-bottom: 1px solid #e3e1ee; }
+  html.light .lm-logo     { color: #1a1b26 !important; }
+  html.light .lm-link     { color: #5b5e72 !important; }
+  html.light .lm-link:hover { color: #545c8b !important; }
+  html.light .lm-link-active { color: #545c8b !important; border-bottom-color: #545c8b !important; }
+  html.light .lm-signin   { color: #5b5e72 !important; }
+  html.light .lm-btn      { background: #545c8b !important; color: #fff !important; }
+  html.light .lm-label    { color: #545c8b !important; }
+  html.light .lm-h1, html.light .lm-h2, html.light .lm-h3 { color: #31323b !important; }
+  html.light .lm-body     { color: #5e5e69 !important; }
+  html.light .lm-card     { background: rgba(255,255,255,0.9) !important; border-color: #e3e1ee !important; }
+  html.light .lm-card-featured { background: #545c8b !important; }
+  html.light .lm-card-featured .lm-h3 { color: #fff !important; }
+  html.light .lm-card-featured .lm-body { color: rgba(255,255,255,0.8) !important; }
+  html.light .lm-icon-wrap { background: #efedf7 !important; }
+  html.light .lm-divider  { border-color: #e3e1ee !important; }
+  html.light .lm-pill     { background: #efedf7 !important; }
+  html.light .lm-faq      { background: rgba(255,255,255,0.9) !important; border-color: #e3e1ee !important; }
+  html.light .lm-cta      { background: #efedf7 !important; border-color: #e3e1ee !important; }
+  html.light .lm-cta-btn  { background: #1a1b26 !important; color: #fff !important; }
+  html.light .lm-cta-btn:hover { background: #545c8b !important; }
+  html.light .lm-footer   { background: #f5f2fb !important; border-top-color: #e3e1ee !important; }
+  html.light .lm-footer-text { color: rgba(26,27,38,0.4) !important; }
+  html.light .lm-check    { color: #545c8b !important; }
+  html.light .lm-check-tert { color: #70557b !important; }
+
+  body { overflow-x: hidden; }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+  }
+  #theme-toggle {
+    cursor:pointer; width:2.25rem; height:2.25rem; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    transition:background 0.2s; border:1px solid transparent;
+  }
+  html.dark  #theme-toggle { background:#1e1f28; border-color:#47475033; color:#abaab4; }
+  html.dark  #theme-toggle:hover { background:#24252f; }
+  html.light #theme-toggle { background:#efedf7; border-color:#b1b1bd44; color:#545c8b; }
+  html.light #theme-toggle:hover { background:#e3e1ee; }
+  #icon-moon { display:block; } #icon-sun { display:none; }
+  html.light #icon-moon { display:none; } html.light #icon-sun { display:block; }
+
+  .hover-lift { transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+  .hover-lift:hover { transform: translateY(-4px); }
+
+  /* FAQ accordion */
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  details[open] .faq-icon { transform: rotate(45deg); }
+  .faq-icon { transition: transform 0.2s ease; }
+</style>
+</head>
+<body class="font-body">
+<div class="constellation-bg"></div>
+
+<!-- NAV -->
+<nav class="lm-nav fixed top-0 w-full z-50 bg-[#0d0e15]/80 backdrop-blur-xl transition-colors duration-500 shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
+  <div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-20">
+    <a href="index.html" class="lm-logo text-2xl font-bold tracking-tighter text-[#f4f2fd] font-headline">Palette</a>
+    <div class="hidden md:flex items-center space-x-10 font-headline tracking-tight text-sm font-medium">
+      <a href="index.html"     class="lm-link text-[#f4f2fd]/60 hover:text-[#f4f2fd] transition-colors">Platform</a>
+      <a href="solutions.html" class="lm-link text-[#f4f2fd]/60 hover:text-[#f4f2fd] transition-colors">Solutions</a>
+      <a href="pricing.html"   class="lm-link-active text-[#f4f2fd] border-b border-[#9ba9f5] pb-0.5 transition-colors">Pricing</a>
+      <a href="docs.html"      class="lm-link text-[#f4f2fd]/60 hover:text-[#f4f2fd] transition-colors">Docs</a>
+    </div>
+    <div class="flex items-center space-x-4 font-headline text-sm font-medium">
+      <button id="theme-toggle" title="Toggle theme">
+        <span id="icon-moon" class="material-symbols-outlined text-[18px]">dark_mode</span>
+        <span id="icon-sun"  class="material-symbols-outlined text-[18px]">light_mode</span>
+      </button>
+      <button class="lm-signin text-[#f4f2fd]/60 hover:text-[#f4f2fd] transition-colors">Sign In</button>
+      <button class="lm-btn bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-2.5 rounded-md hover:scale-[1.02] transition-transform active:scale-95">
+        Request Access
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="relative pt-20">
+
+  <!-- HERO -->
+  <section class="py-32 px-8 max-w-7xl mx-auto text-center space-y-6">
+    <p class="lm-label font-label text-xs uppercase tracking-[0.3em] text-primary">Pricing</p>
+    <h1 class="lm-h1 font-headline text-6xl md:text-7xl font-extrabold tracking-tighter leading-[0.95] text-on-background">
+      Priced Around<br/><span class="text-gradient">Your Volume</span>
+    </h1>
+    <p class="lm-body text-xl text-on-surface-variant max-w-2xl mx-auto font-light leading-relaxed">
+      We're in private beta and working closely with early customers to find the right fit. No fixed plans yet — just a conversation about your needs.
+    </p>
+  </section>
+
+  <!-- TIER CARDS -->
+  <section class="py-8 px-8 max-w-5xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+      <!-- Starter -->
+      <div class="lm-card bg-surface-container rounded-2xl p-10 flex flex-col justify-between border border-outline-variant/10 hover-lift">
+        <div class="space-y-8">
+          <div>
+            <p class="lm-label text-xs uppercase tracking-[0.3em] text-primary font-semibold mb-3">Starter</p>
+            <h2 class="lm-h2 font-headline text-3xl font-bold text-on-background mb-2">Growing Finance Teams</h2>
+            <p class="lm-body text-on-surface-variant text-sm leading-relaxed">
+              For companies processing under 1,000 invoices per month looking to eliminate manual verification and catch billing errors before payment.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <p class="lm-body text-on-surface-variant text-xs uppercase tracking-widest font-semibold">What's included</p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="lm-check material-symbols-outlined text-primary text-sm mt-0.5">check</span>
+                <span class="lm-body text-on-surface-variant text-sm">Automated invoice ingestion from email &amp; uploads</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="lm-check material-symbols-outlined text-primary text-sm mt-0.5">check</span>
+                <span class="lm-body text-on-surface-variant text-sm">Contract matching and discrepancy detection</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="lm-check material-symbols-outlined text-primary text-sm mt-0.5">check</span>
+                <span class="lm-body text-on-surface-variant text-sm">Duplicate and fraud detection</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="lm-check material-symbols-outlined text-primary text-sm mt-0.5">check</span>
+                <span class="lm-body text-on-surface-variant text-sm">Human-in-the-loop escalation for edge cases</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="lm-check material-symbols-outlined text-primary text-sm mt-0.5">check</span>
+                <span class="lm-body text-on-surface-variant text-sm">Full audit trail and decision logs</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-on-surface-variant/30 text-sm mt-0.5">remove</span>
+                <span class="text-on-surface-variant/40 text-sm">Autonomous payment execution</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-on-surface-variant/30 text-sm mt-0.5">remove</span>
+                <span class="text-on-surface-variant/40 text-sm">Multi-entity support</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-10 space-y-3">
+          <p class="lm-body text-on-surface-variant text-xs text-center">Pricing based on invoice volume. No seat fees.</p>
+          <button class="w-full border border-primary text-primary font-bold py-4 rounded-md hover:bg-primary hover:text-on-primary transition-colors">
+            Request Starter Pricing
+          </button>
+        </div>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="lm-card-featured bg-primary rounded-2xl p-10 flex flex-col justify-between hover-lift shadow-[0_0_60px_rgba(155,169,245,0.15)]">
+        <div class="space-y-8">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <p class="text-xs uppercase tracking-[0.3em] text-on-primary/70 font-semibold">Enterprise</p>
+              <span class="px-2 py-0.5 bg-white/10 rounded text-[10px] uppercase tracking-wider text-on-primary font-bold">Recommended</span>
+            </div>
+            <h2 class="lm-h3 font-headline text-3xl font-bold text-on-primary mb-2">High-Volume Operations</h2>
+            <p class="lm-body text-on-primary/80 text-sm leading-relaxed">
+              For companies with complex vendor networks, multiple entities, and the need for fully autonomous payment execution without manual touchpoints.
+            </p>
+          </div>
+
+          <div class="space-y-4">
+            <p class="text-on-primary/60 text-xs uppercase tracking-widest font-semibold">Everything in Starter, plus</p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-on-primary text-sm mt-0.5">check</span>
+                <span class="text-on-primary/90 text-sm">Autonomous payment execution via banking API</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-on-primary text-sm mt-0.5">check</span>
+                <span class="text-on-primary/90 text-sm">Multi-entity and multi-currency support</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-on-primary text-sm mt-0.5">check</span>
+                <span class="text-on-primary/90 text-sm">Custom approval threshold configuration</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-on-primary text-sm mt-0.5">check</span>
+                <span class="text-on-primary/90 text-sm">ERP and accounting software integration</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-on-primary text-sm mt-0.5">check</span>
+                <span class="text-on-primary/90 text-sm">Dedicated onboarding and customer success</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-on-primary text-sm mt-0.5">check</span>
+                <span class="text-on-primary/90 text-sm">SOC 2 compliance documentation &amp; VPC deployment</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="material-symbols-outlined text-on-primary text-sm mt-0.5">check</span>
+                <span class="text-on-primary/90 text-sm">SLA guarantees and priority support</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-10 space-y-3">
+          <p class="text-on-primary/60 text-xs text-center">Custom pricing based on volume and integration complexity.</p>
+          <button class="w-full bg-on-primary text-primary font-bold py-4 rounded-md hover:bg-white transition-colors">
+            Request Enterprise Pricing
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Volume note -->
+    <div class="mt-8 text-center">
+      <p class="lm-body text-on-surface-variant text-sm">
+        Pricing is based on invoice volume and integration scope, not per-seat licenses. We work directly with every early customer to structure the right arrangement.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-32 px-8 max-w-3xl mx-auto space-y-12">
+    <div class="text-center space-y-4">
+      <p class="lm-label font-label text-xs uppercase tracking-[0.3em] text-primary">FAQ</p>
+      <h2 class="lm-h2 font-headline text-4xl font-bold tracking-tight text-on-background">Common Questions</h2>
+    </div>
+
+    <div class="space-y-4">
+
+      <details class="lm-faq bg-surface-container rounded-xl border border-outline-variant/10 overflow-hidden group">
+        <summary class="flex items-center justify-between p-8 gap-4">
+          <span class="lm-h3 font-headline font-semibold text-on-background text-lg">Why don't you publish fixed prices?</span>
+          <span class="faq-icon lm-check material-symbols-outlined text-primary shrink-0">add</span>
+        </summary>
+        <div class="px-8 pb-8">
+          <p class="lm-body text-on-surface-variant leading-relaxed">
+            We're in private beta. The right price depends heavily on your invoice volume, existing systems, and how deep the integration needs to go. Publishing a fixed number before we understand your environment would serve us, not you. We'd rather have a short conversation and give you a number that actually makes sense.
+          </p>
+        </div>
+      </details>
+
+      <details class="lm-faq bg-surface-container rounded-xl border border-outline-variant/10 overflow-hidden group">
+        <summary class="flex items-center justify-between p-8 gap-4">
+          <span class="lm-h3 font-headline font-semibold text-on-background text-lg">What does the onboarding process look like?</span>
+          <span class="faq-icon lm-check material-symbols-outlined text-primary shrink-0">add</span>
+        </summary>
+        <div class="px-8 pb-8">
+          <p class="lm-body text-on-surface-variant leading-relaxed">
+            We start by ingesting a sample of your existing invoices and contracts so the system can learn your vendor relationships and contract structures. Early customers work closely with our team throughout this process. We do not expect you to configure the system yourself — that's our job.
+          </p>
+        </div>
+      </details>
+
+      <details class="lm-faq bg-surface-container rounded-xl border border-outline-variant/10 overflow-hidden group">
+        <summary class="flex items-center justify-between p-8 gap-4">
+          <span class="lm-h3 font-headline font-semibold text-on-background text-lg">Is our financial data secure?</span>
+          <span class="faq-icon lm-check material-symbols-outlined text-primary shrink-0">add</span>
+        </summary>
+        <div class="px-8 pb-8">
+          <p class="lm-body text-on-surface-variant leading-relaxed">
+            Security is a first-class requirement, not an add-on. Enterprise deployments run within your own VPC — your invoice and contract data never touches shared infrastructure. We are building toward SOC 2 Type II certification and can share our current security posture in detail during a technical conversation.
+          </p>
+        </div>
+      </details>
+
+      <details class="lm-faq bg-surface-container rounded-xl border border-outline-variant/10 overflow-hidden group">
+        <summary class="flex items-center justify-between p-8 gap-4">
+          <span class="lm-h3 font-headline font-semibold text-on-background text-lg">Can a human still review decisions before payment?</span>
+          <span class="faq-icon lm-check material-symbols-outlined text-primary shrink-0">add</span>
+        </summary>
+        <div class="px-8 pb-8">
+          <p class="lm-body text-on-surface-variant leading-relaxed">
+            Yes, and for most early customers we recommend starting there. You configure approval thresholds — invoices under a certain amount from known vendors with high confidence scores are auto-approved, while anything outside those bounds goes to a human review queue. You decide how much autonomy the system has, and can expand it over time as trust builds.
+          </p>
+        </div>
+      </details>
+
+      <details class="lm-faq bg-surface-container rounded-xl border border-outline-variant/10 overflow-hidden group">
+        <summary class="flex items-center justify-between p-8 gap-4">
+          <span class="lm-h3 font-headline font-semibold text-on-background text-lg">What integrations do you support?</span>
+          <span class="faq-icon lm-check material-symbols-outlined text-primary shrink-0">add</span>
+        </summary>
+        <div class="px-8 pb-8">
+          <p class="lm-body text-on-surface-variant leading-relaxed">
+            We are actively building integrations with major ERP systems (SAP, NetSuite, Oracle), accounting platforms (QuickBooks, Xero), and banking APIs. For early customers, we scope integrations as part of the onboarding conversation. If you use a system that isn't listed, tell us — it helps us prioritize our roadmap.
+          </p>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-32 px-8">
+    <div class="lm-cta max-w-5xl mx-auto rounded-3xl bg-surface-container p-16 md:p-24 text-center space-y-8 relative overflow-hidden border border-outline-variant/10">
+      <div class="absolute -top-24 -left-24 w-64 h-64 bg-primary/10 rounded-full blur-[80px]"></div>
+      <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-tertiary/10 rounded-full blur-[80px]"></div>
+      <h2 class="lm-h1 font-headline text-4xl md:text-6xl font-extrabold tracking-tighter text-on-background">
+        Let's Talk Numbers
+      </h2>
+      <p class="lm-body text-on-surface-variant text-xl max-w-2xl mx-auto leading-relaxed">
+        Tell us your invoice volume and current process. We'll come back with a clear picture of where Palette fits and what it would cost.
+      </p>
+      <div class="pt-4">
+        <button class="lm-cta-btn bg-on-background text-surface px-12 py-5 rounded-md font-bold text-xl hover:bg-primary transition-colors">
+          Schedule a Pricing Call
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="lm-footer bg-[#0d0e15] w-full py-16 px-8 border-t border-[#474750]/15">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 max-w-7xl mx-auto">
+    <div class="space-y-6">
+      <div class="lm-logo text-lg font-bold text-[#f4f2fd] font-headline">Palette</div>
+      <p class="lm-footer-text text-xs font-body uppercase tracking-widest text-[#f4f2fd]/40 leading-relaxed">
+        Transforming accounts payable into an autonomous execution layer. Built for precision at scale.
+      </p>
+    </div>
+    <div class="space-y-6">
+      <h4 class="lm-logo text-[#f4f2fd] font-semibold font-headline">Platform</h4>
+      <ul class="space-y-4 text-xs font-body uppercase tracking-widest text-[#f4f2fd]/40">
+        <li class="lm-footer-text hover:text-[#f4f2fd] transition-colors cursor-pointer">Invoice Processing</li>
+        <li class="lm-footer-text hover:text-[#f4f2fd] transition-colors cursor-pointer">Contract Matching</li>
+        <li class="lm-footer-text hover:text-[#f4f2fd] transition-colors cursor-pointer">Fraud Detection</li>
+        <li class="lm-footer-text hover:text-[#f4f2fd] transition-colors cursor-pointer">Payment Execution</li>
+      </ul>
+    </div>
+    <div class="space-y-6">
+      <h4 class="lm-logo text-[#f4f2fd] font-semibold font-headline">Resources</h4>
+      <ul class="space-y-4 text-xs font-body uppercase tracking-widest text-[#f4f2fd]/40">
+        <li class="lm-footer-text hover:text-[#f4f2fd] transition-colors cursor-pointer">Documentation</li>
+        <li class="lm-footer-text hover:text-[#f4f2fd] transition-colors cursor-pointer">Security</li>
+        <li class="lm-footer-text hover:text-[#f4f2fd] transition-colors cursor-pointer">Status</li>
+        <li class="lm-footer-text hover:text-[#f4f2fd] transition-colors cursor-pointer">Terms of Service</li>
+      </ul>
+    </div>
+    <div class="space-y-6">
+      <h4 class="lm-logo text-[#f4f2fd] font-semibold font-headline">Connect</h4>
+      <ul class="space-y-4 text-xs font-body uppercase tracking-widest text-[#f4f2fd]/40">
+        <li class="lm-footer-text hover:text-[#f4f2fd] transition-colors cursor-pointer">Twitter / X</li>
+        <li class="lm-footer-text hover:text-[#f4f2fd] transition-colors cursor-pointer">LinkedIn</li>
+        <li class="lm-footer-text hover:text-[#f4f2fd] transition-colors cursor-pointer">Contact Us</li>
+        <li class="lm-footer-text hover:text-[#f4f2fd] transition-colors cursor-pointer">Privacy Policy</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-outline-variant/10">
+    <p class="lm-footer-text text-xs font-body uppercase tracking-widest text-[#f4f2fd]/40">
+      © 2025 Palette. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<script>
+  const html = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') html.classList.replace('dark', 'light');
+  toggle.addEventListener('click', () => {
+    if (html.classList.contains('dark')) {
+      html.classList.replace('dark', 'light');
+      localStorage.setItem('theme', 'light');
+    } else {
+      html.classList.replace('light', 'dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+</script>
+</body>
+</html>
